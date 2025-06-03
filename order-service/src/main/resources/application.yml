@@ -5,3 +5,13 @@ spring:
     mongodb:
       uri: ${MONGODB_URI:mongodb://admin:admin@localhost:27017}
       database: admin
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
+    consumer:
+      group-id: order-group
+      auto-offset-reset: latest
+logging:
+  level:
+    org:
+      apache:
+        kafka: off
