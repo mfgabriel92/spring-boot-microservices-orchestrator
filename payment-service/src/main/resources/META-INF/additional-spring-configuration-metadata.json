@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "spring.kafka.topic.orchestrator",
+      "type": "java.lang.String",
+      "description": ""
+    },
+    {
+      "name": "spring.kafka.topic.payment-success",
+      "type": "java.lang.String",
+      "description": ""
+    },
+    {
+      "name": "spring.kafka.topic.payment-failure",
+      "type": "java.lang.String",
+      "description": ""
+    }
+  ]
+}

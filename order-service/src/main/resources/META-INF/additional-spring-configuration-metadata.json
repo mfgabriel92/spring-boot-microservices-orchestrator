@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "spring.kafka.topic.start-saga",
+      "type": "java.lang.String",
+      "description": ""
+    },
+    {
+      "name": "spring.kafka.topic.notify-ending",
+      "type": "java.lang.String",
+      "description": ""
+    }
+  ]
+}

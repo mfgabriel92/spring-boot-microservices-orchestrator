@@ -14,6 +14,10 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   kafka:
     bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
+    topic:
+      orchestrator: orchestrator
+      product-validation-success: product-validation-success
+      product-validation-failure: product-validation-failure
     consumer:
       group-id: product-validation-group
       auto-offset-reset: latest
