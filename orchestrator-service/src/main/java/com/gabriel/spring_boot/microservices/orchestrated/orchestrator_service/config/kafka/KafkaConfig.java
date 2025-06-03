@@ -1,6 +1,7 @@
 package com.gabriel.spring_boot.microservices.orchestrated.orchestrator_service.config.kafka;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -9,15 +10,21 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.gabriel.spring_boot.microservices.orchestrated.orchestrator_service.core.enums.Topic.*;
+
 @EnableKafka
 @Configuration
 @RequiredArgsConstructor
 public class KafkaConfig {
+    private static final Integer PARTITION_COUNT = 1;
+    private static final Integer REPLICA_COUNT = 1;
+
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
@@ -42,6 +49,61 @@ public class KafkaConfig {
         return new KafkaTemplate<>(producerFactory);
     }
 
+    @Bean
+    public NewTopic startSagaTopic() {
+        return buildTopic(START_SAGA.getTopic());
+    }
+
+    @Bean
+    public NewTopic orchestratorTopic() {
+        return buildTopic(BASE_ORCHESTRATOR.getTopic());
+    }
+
+    @Bean
+    public NewTopic finishSuccessTopic() {
+        return buildTopic(FINISH_SUCCESS.getTopic());
+    }
+
+    @Bean
+    public NewTopic finishFailureTopic() {
+        return buildTopic(FINISH_FAILURE.getTopic());
+    }
+
+    @Bean
+    public NewTopic productValidationSuccessTopic() {
+        return buildTopic(PRODUCT_VALIDATION_SUCCESS.getTopic());
+    }
+
+    @Bean
+    public NewTopic productValidationFailureTopic() {
+        return buildTopic(PRODUCT_VALIDATION_FAILURE.getTopic());
+    }
+
+    @Bean
+    public NewTopic paymentSuccessTopic() {
+        return buildTopic(PAYMENT_SUCCESS.getTopic());
+    }
+
+    @Bean
+    public NewTopic paymentFailureTopic() {
+        return buildTopic(PAYMENT_FAILURE.getTopic());
+    }
+
+    @Bean
+    public NewTopic inventorySuccessTopic() {
+        return buildTopic(INVENTORY_SUCCESS.getTopic());
+    }
+
+    @Bean
+    public NewTopic inventoryFailureTopic() {
+        return buildTopic(INVENTORY_FAILURE.getTopic());
+    }
+
+    @Bean
+    public NewTopic notifyEndingTopic() {
+        return buildTopic(NOTIFY_ENDING.getTopic());
+    }
+
     private Map<String, Object> consumerProps() {
         var props = new HashMap<String, Object>();
 
@@ -62,5 +124,13 @@ public class KafkaConfig {
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 
         return props;
+    }
+
+    private NewTopic buildTopic(String name) {
+        return TopicBuilder
+            .name(name)
+            .replicas(REPLICA_COUNT)
+            .partitions(PARTITION_COUNT)
+            .build();
     }
 }
