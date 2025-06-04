@@ -1,0 +1,24 @@
+{
+  "properties": [
+    {
+      "name": "spring.kafka.topic.start-saga",
+      "type": "java.lang.String",
+      "description": ""
+    },
+    {
+      "name": "spring.kafka.topic.orchestrator",
+      "type": "java.lang.String",
+      "description": ""
+    },
+    {
+      "name": "spring.kafka.topic.finish-success",
+      "type": "java.lang.String",
+      "description": ""
+    },
+    {
+      "name": "spring.kafka.topic.finish-failure",
+      "type": "java.lang.String",
+      "description": ""
+    }
+  ]
+}
