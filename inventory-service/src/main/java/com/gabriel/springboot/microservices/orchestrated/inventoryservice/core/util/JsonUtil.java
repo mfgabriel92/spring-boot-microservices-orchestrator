@@ -1,7 +1,7 @@
 package com.gabriel.springboot.microservices.orchestrated.inventoryservice.core.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gabriel.springboot.microservices.orchestrated.productvalidationservice.core.dto.Event;
+import com.gabriel.springboot.microservices.orchestrated.inventoryservice.core.dto.Event;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
