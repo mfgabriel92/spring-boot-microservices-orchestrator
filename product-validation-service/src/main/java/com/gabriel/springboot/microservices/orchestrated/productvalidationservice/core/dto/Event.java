@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -19,5 +20,9 @@ public class Event {
     private String source;
     private SagaStatus status;
     private Order payload;
-    private List<History> eventHistory;
+    private List<History> eventHistory = new ArrayList<>();
+
+    public void addHistory(History history) {
+        eventHistory.add(history);
+    }
 }

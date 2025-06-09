@@ -8,9 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import static java.time.LocalDateTime.now;
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Slf4j
@@ -41,7 +41,7 @@ public class EventService {
 
     public void notifyEnding(Event event) {
         event.setOrderId(event.getOrderId());
-        event.setCreatedAt(LocalDateTime.now());
+        event.setCreatedAt(now());
         save(event);
 
         log.info(

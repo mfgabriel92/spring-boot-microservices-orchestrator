@@ -10,8 +10,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static java.time.LocalDateTime.now;
 
 @Service
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class OrderService {
         var transactionId = String.format(TRANSACTION_ID_PATTERN, Instant.now().toEpochMilli(), UUID.randomUUID());
         var order = Order.builder()
             .products(request.getProducts())
-            .createdAt(LocalDateTime.now())
+            .createdAt(now())
             .transactionId(transactionId)
             .build();
 
@@ -45,7 +46,7 @@ public class OrderService {
             .orderId(order.getId())
             .transactionId(order.getTransactionId())
             .payload(order)
-            .createdAt(LocalDateTime.now())
+            .createdAt(now())
             .build();
 
         return eventService.save(event);
